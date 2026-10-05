@@ -741,12 +741,12 @@ function drawTable(t) {
   SEATS.filter(s => s.tb === t[2] && s.item).forEach(s => { const [ix, iy] = P(tx + .5 + (s.face > 0 ? -.2 : .2), ty + .5 + (s.face > 0 ? -.1 : .12), 31); drawFood(g, s.item, ix, iy - 5 * sc, 9 * sc, time); });
 }
 function drawChair(s) {
-  const x = s.x, y = s.y, lea = "#8d5a3b";
-  box(x + .1, y + .1, x + .9, y + .9, 0, 9, "#6b4429"); box(x + .14, y + .14, x + .86, y + .86, 9, 20, lea); box(x + .2, y + .2, x + .8, y + .8, 20, 25, "#ad7650");
-  box(x + .1, y + .08, x + .9, y + .2, 20, 35, lea); box(x + .1, y + .8, x + .9, y + .92, 20, 35, lea);
-  if (s.face > 0) box(x + .08, y + .1, x + .24, y + .9, 20, 52, lea);
+  const x = s.x, y = s.y, lea = "#8d5a3b", top = "#a9724a";
+  box(x + .12, y + .12, x + .88, y + .88, 0, 7, "#5e3b25"); box(x + .14, y + .14, x + .86, y + .86, 7, 17, lea); box(x + .2, y + .2, x + .8, y + .8, 17, 21, top);
+  box(x + .1, y + .08, x + .9, y + .2, 17, 27, lea); box(x + .1, y + .8, x + .9, y + .92, 17, 27, lea); box(x + .1, y + .08, x + .9, y + .2, 27, 29, top); box(x + .1, y + .8, x + .9, y + .92, 27, 29, top);
+  if (s.face > 0) { box(x + .08, y + .1, x + .24, y + .9, 17, 46, lea); box(x + .08, y + .1, x + .24, y + .9, 46, 49, top); }
 }
-function drawChairBack(s) { const x = s.x, y = s.y; box(x + .76, y + .1, x + .92, y + .9, 20, 52, "#8d5a3b"); }
+function drawChairBack(s) { const x = s.x, y = s.y; box(x + .8, y + .12, x + .92, y + .88, 17, 36, "#8d5a3b"); box(x + .8, y + .12, x + .92, y + .88, 36, 38, "#a9724a"); }
 function drawPlant(x, y, pot) {
   const [sx, sy] = P(x + .5, y + .5, 0); ell(g, sx, sy + 2 * sc, 14 * sc, 6 * sc, "#0002"); box(x + .3, y + .3, x + .7, y + .7, 0, 18, pot); const [px, py] = P(x + .5, y + .5, 18);
   [[-9, -16, 9, "#4f9b5c"], [9, -18, 9, "#5faf6a"], [0, -28, 11, "#4f9b5c"], [-4, -18, 10, "#6ec27a"], [6, -10, 8, "#5faf6a"], [-10, -8, 7, "#6ec27a"]].forEach(l => { g.save(); g.translate(px + l[0] * sc, py + l[1] * sc); g.rotate(l[0] * .04 + Math.sin(time + l[0]) * .04); ell(g, 0, 0, l[2] * sc * .62, l[2] * sc, l[3], 0, "#2f7a3a"); g.restore(); });
@@ -774,7 +774,7 @@ const OW = () => ({ pants: "#3c3c52", mood: "happy", fem: true, glasses: S.av.gl
 function drawOwner() { const [sx, sy] = P(owner.x, owner.y, 0); person(sx, sy, sc * .95, Object.assign(OW(), { t: owner.t, apron: true })); }
 function drawWaiter(w) { const [sx, sy] = P(w.x, w.y, 0); person(sx, sy, sc * .95, { t: w.t, walk: w.walking, skin: w.skin, hair: w.hair, shirt: "#f4f4f8", coat: true, style: w.style, mood: "happy", hold: w.hold, fem: w.fem, glasses: w.glasses, eye: w.eye, pants: "#3a3a4e" }); }
 function drawCustomer(c) {
-  const sit = c.state === "sit" || c.state === "wait" || c.state === "eat", [sx, sy] = P(c.x, c.y, sit ? 24 : 0), k = sc * .95;
+  const sit = c.state === "sit" || c.state === "wait" || c.state === "eat", [sx, sy] = P(c.x, c.y, sit ? 21 : 0), k = sc * .95;
   c.sy = person(sx, sy, k, { t: c.t, walk: c.walking && !sit, sit, skin: c.skin, hair: c.hair, shirt: c.shirt, style: c.style, mood: c.mood, vip: c.vip, ph: c.ph, eye: c.eye, fem: c.fem, glasses: c.glasses, dance: S.owned.jukebox && S.music && c.state !== "enter" && c.state !== "leave" }); c.sx = sx;
 }
 function drawBubbles() {
